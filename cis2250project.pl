@@ -19,8 +19,7 @@ use Text::CSV  1.32;   # We will be using the CSV module (version 1.32 or higher
 #
 #      Functional Summary
 #
-#      Commandline Parameters: 1
-#         $ARGV[0] = name of the input file containing the names
+#      Commandline Parameters: none
 #
 #      References
 #         Name files from http://www.ssa.gov/OACT/babynames/limits.html
@@ -31,3 +30,20 @@ print "Choose one of the following options.\n"
 # TODO
 # Present users 
 # Get user input for which template they want to use
+
+print "Choose the range of years you would like to examine.\n";
+print "Starting year:";
+my $startingYear = <STDIN>;
+chomp $startingYear;
+print "\n";
+
+print "Ending year:";
+my $endingYear = <STDIN>;
+chomp $endingYear;
+print "\n";
+
+print $staringYear;
+print $endingYear;
+print "\n";
+
+
