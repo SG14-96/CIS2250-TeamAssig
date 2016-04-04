@@ -9,7 +9,7 @@ use Text::CSV  1.32;   # We will be using the CSV module (version 1.32 or higher
                        # to parse each line
 
 #
-#   readFile.pl
+#   cis2250project.pl
 #      Author(s): Dickson D'Cunha (0904177),
 #                 Alejandro Lobo Mujica (0911715)
 #                 Santiago Gutierrez (0895285)
@@ -25,9 +25,91 @@ use Text::CSV  1.32;   # We will be using the CSV module (version 1.32 or higher
 #      References
 #         Name files from http://www.ssa.gov/OACT/babynames/limits.html
 #
-print "We shall answer some of your questions between 1994 to 2014.\n"
-print "Choose one of the following options.\n"
+
+############
+# Global Variables
+#
+
+my $TRUE 			= 1;
+my $FALSE 			= 0;
+my $NEW_LINE 		= "\n";
+my $SPACE			= " ";
+
+my $startingYear 	= "";
+my $endingYear 		= "";
+
+
+############
+# Main
+#
+
+clearScreen();
+getYearRange();
+
+
+
+
+############
+# Subroutines
+#
+
+sub getYearRange{
+	my $continue = $FALSE;
+	print "Choose the range of years you would like to examine (Min: 1994 - Max: 2014).\n";
+
+	do {
+		$continue = $TRUE;
+		print "Starting year:";
+		$startingYear = <STDIN>;
+
+		if($startingYear < 1994){
+			$continue = $FALSE;
+		}
+		if($startingYear > 2014){
+			$continue = $FALSE;
+		}
+
+		if($continue == $FALSE){
+			print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
+		}
+
+	} while($continue == $FALSE);
+
+
+
+	chomp $startingYear;
+
+	print "Ending year:";
+	$endingYear = <STDIN>;
+	chomp $endingYear;
+
+	# print $startingYear." ".$endingYear.$NEW_LINE;
+}
+
+sub validateStartYear{
+	my $year = _[0];
+	if($year < 1994){
+		print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
+		return $FALSE;
+	}
+	else if($year > 2014){
+		print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
+		return $FALSE;
+	}
+	else{
+		return $TRUE
+	}
+}
+
+sub clearScreen{
+	system("clear");
+	return;
+}
 
 # TODO
 # Present users 
 # Get user input for which template they want to use
+
+
+
+
