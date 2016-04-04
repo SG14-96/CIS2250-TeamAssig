@@ -8,6 +8,7 @@ use version;   our $VERSION = qv('5.16.0');   # This is the version of Perl to b
 use Text::CSV  1.32;   # We will be using the CSV module (version 1.32 or higher)
                        # to parse each line
 
+
 #
 #   cis2250project.pl
 #      Author(s): Dickson D'Cunha (0904177),
@@ -43,10 +44,9 @@ my $endingYear 		= "";
 # Main
 #
 
+
 clearScreen();
 getYearRange();
-
-
 
 
 ############
@@ -58,42 +58,62 @@ sub getYearRange{
 	print "Choose the range of years you would like to examine (Min: 1994 - Max: 2014).\n";
 
 	do {
-		$continue = $TRUE;
 		print "Starting year:";
 		$startingYear = <STDIN>;
-
-		if($startingYear < 1994){
-			$continue = $FALSE;
-		}
-		if($startingYear > 2014){
-			$continue = $FALSE;
-		}
+		$continue = validateStartYear($startingYear);
 
 		if($continue == $FALSE){
 			print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
 		}
 
 	} while($continue == $FALSE);
-
-
-
 	chomp $startingYear;
 
-	print "Ending year:";
-	$endingYear = <STDIN>;
+	do {
+		print "Ending year:";
+		$endingYear = <STDIN>;
+		$continue = validateEndYear($endingYear);
+
+		if($continue == $FALSE){
+			print "Invalid start year. Must be in the range of ".$startingYear." to 2014.".$NEW_LINE;
+		}
+
+	} while($continue == $FALSE);
+
 	chomp $endingYear;
 
 	# print $startingYear." ".$endingYear.$NEW_LINE;
 }
 
 sub validateStartYear{
-	my $year = _[0];
-	if($year < 1994){
-		print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
+	my $year = $_[0];
+
+	if ($year =~ /\D/){
 		return $FALSE;
 	}
-	else if($year > 2014){
-		print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
+
+	if($year < 1994){
+		return $FALSE;
+	}
+	elsif($year > 2014){
+		return $FALSE;
+	}
+	else{
+		return $TRUE
+	}
+}
+
+sub validateEndYear{
+	my $year = $_[0];
+
+	if ($year =~ /\D/){
+		return $FALSE;
+	}
+
+	if($year < $startingYear){
+		return $FALSE;
+	}
+	elsif($year > 2014){
 		return $FALSE;
 	}
 	else{
