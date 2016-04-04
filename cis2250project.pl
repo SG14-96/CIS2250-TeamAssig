@@ -88,9 +88,8 @@ sub getYearRange{
 sub validateStartYear{
     my $year = $_[0];
 
-    if ($year =~ /\D/){
-       return $FALSE;
-    }
+    if ($year =~ /^[0-9,.E]+$/){}
+    else { return $FALSE; }
 
     if($year < 1994){
        return $FALSE;
@@ -106,9 +105,8 @@ sub validateStartYear{
 sub validateEndYear{
     my $year = $_[0];
 
-    if ($year =~ /\D/){
-       return $FALSE;
-    }
+    if ($year =~ /^[0-9,.E]+$/){}
+    else { return $FALSE; }
 
     if($year < $startingYear){
        return $FALSE;
