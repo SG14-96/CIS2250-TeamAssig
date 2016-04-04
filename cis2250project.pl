@@ -31,13 +31,13 @@ use Text::CSV  1.32;   # We will be using the CSV module (version 1.32 or higher
 # Global Variables
 #
 
-my $TRUE 			= 1;
-my $FALSE 			= 0;
-my $NEW_LINE 		= "\n";
-my $SPACE			= " ";
+my $TRUE        = 1;
+my $FALSE       = 0;
+my $NEW_LINE    = "\n";
+my $SPACE       = " ";
 
-my $startingYear 	= "";
-my $endingYear 		= "";
+my $startingYear    = "";
+my $endingYear      = "";
 
 
 ############
@@ -54,76 +54,76 @@ getYearRange();
 #
 
 sub getYearRange{
-	my $continue = $FALSE;
-	print "Choose the range of years you would like to examine (Min: 1994 - Max: 2014).\n";
+    my $continue = $FALSE;
+    print "Choose the range of years you would like to examine (Min: 1994 - Max: 2014).\n";
 
-	do {
-		print "Starting year:";
-		$startingYear = <STDIN>;
-		$continue = validateStartYear($startingYear);
+    do {
+       print "Starting year:";
+       $startingYear = <STDIN>;
+       $continue = validateStartYear($startingYear);
 
-		if($continue == $FALSE){
-			print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
-		}
+       if($continue == $FALSE){
+         print "Invalid start year. Must be in the range of 1994 to 2014.".$NEW_LINE;
+       }
 
-	} while($continue == $FALSE);
-	chomp $startingYear;
+    } while($continue == $FALSE);
+    chomp $startingYear;
 
-	do {
-		print "Ending year:";
-		$endingYear = <STDIN>;
-		$continue = validateEndYear($endingYear);
+    do {
+       print "Ending year:";
+       $endingYear = <STDIN>;
+       $continue = validateEndYear($endingYear);
 
-		if($continue == $FALSE){
-			print "Invalid start year. Must be in the range of ".$startingYear." to 2014.".$NEW_LINE;
-		}
+       if($continue == $FALSE){
+         print "Invalid start year. Must be in the range of ".$startingYear." to 2014.".$NEW_LINE;
+       }
 
-	} while($continue == $FALSE);
+    } while($continue == $FALSE);
 
-	chomp $endingYear;
+    chomp $endingYear;
 
-	# print $startingYear." ".$endingYear.$NEW_LINE;
+    # print $startingYear." ".$endingYear.$NEW_LINE;
 }
 
 sub validateStartYear{
-	my $year = $_[0];
+    my $year = $_[0];
 
-	if ($year =~ /\D/){
-		return $FALSE;
-	}
+    if ($year =~ /\D/){
+       return $FALSE;
+    }
 
-	if($year < 1994){
-		return $FALSE;
-	}
-	elsif($year > 2014){
-		return $FALSE;
-	}
-	else{
-		return $TRUE
-	}
+    if($year < 1994){
+       return $FALSE;
+    }
+    elsif($year > 2014){
+       return $FALSE;
+    }
+    else{
+       return $TRUE
+    }
 }
 
 sub validateEndYear{
-	my $year = $_[0];
+    my $year = $_[0];
 
-	if ($year =~ /\D/){
-		return $FALSE;
-	}
+    if ($year =~ /\D/){
+       return $FALSE;
+    }
 
-	if($year < $startingYear){
-		return $FALSE;
-	}
-	elsif($year > 2014){
-		return $FALSE;
-	}
-	else{
-		return $TRUE
-	}
+    if($year < $startingYear){
+       return $FALSE;
+    }
+    elsif($year > 2014){
+       return $FALSE;
+    }  
+    else{
+       return $TRUE
+    }
 }
 
 sub clearScreen{
-	system("clear");
-	return;
+    system("clear");
+    return;
 }
 
 # TODO
