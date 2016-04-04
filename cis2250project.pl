@@ -129,5 +129,3 @@ sub clearScreen{
 # Get user input for which template they want to use
 
 
-
-
